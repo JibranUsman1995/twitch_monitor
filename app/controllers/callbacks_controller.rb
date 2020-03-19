@@ -15,7 +15,7 @@ class CallbacksController < ApplicationController
       resp = HTTParty.get("#{apit_endpoint}token?#{parms.to_query}")
       @streamlab_log.save
 
-      return render json: StreamlabLog.create(message: response.body.to_s), status: :ok
+      return render json: StreamlabLog.create(message: resp.body.to_s), status: :ok
     end
 
     if @streamlab_log.save
