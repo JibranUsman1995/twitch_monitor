@@ -12,10 +12,14 @@ class CallbacksController < ApplicationController
 
     if params[:code]
       apit_endpoint = 'https://streamlabs.com/api/v1.0/'
-      resp = HTTParty.get("#{apit_endpoint}token?#{parms.to_query}")
+      resp = HTTParty.post("#{apit_endpoint}token?#{parms.to_query}")
       @streamlab_log.save
 
-      return render json: StreamlabLog.create(message: resp.body.to_s), status: :ok
+      StreamlabLog.create(message: resp.headers.to_s)
+      StreamlabLog.create(message: resp.code.to_s)
+      StreamlabLog.create(message: resp.body.to_s)
+
+      return render json: StreamlabLog.last(3), status: :ok
     end
 
     if @streamlab_log.save
