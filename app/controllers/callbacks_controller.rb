@@ -6,7 +6,7 @@ class CallbacksController < ApplicationController
       client_secret: 'sTJyXjYZjYBcFUgkqsRFHqFsRe1txSBRlGloH5lQ',
       scopes: 'donations.create donations.read alerts.create legacy.token socket.token points.read points.write alerts.write credits.write profiles.write jar.write wheel.write mediashare.control',
       redirect_uri: 'https://twitch-listener-rails.herokuapp.com/callbacks/streamlabs',
-      grant_type: 'authorization_code',
+      grant_type: 'access_token',
       code: params[:code]
     }
 
