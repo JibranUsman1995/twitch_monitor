@@ -1,0 +1,19 @@
+<h1>Hello</h1>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js' type='text/javascript'></script>
+<script>
+  $(document).ready(function(){
+    const socketToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbiI6Ijg4NjFGNTJENDhGMThGQzQ3MDY3IiwicmVhZF9vbmx5Ijp0cnVlLCJwcmV2ZW50X21hc3RlciI6dHJ1ZSwidHdpdGNoX2lkIjoiMTM3MDg3ODAwIn0.57BnuQp4Wh7FuKYvywMeU-xyyG2v9riN0ISduHqRLnw'; //Socket token from /socket/token end point
+      
+    const streamlabs = io(`https://sockets.streamlabs.com?token=${socketToken}`, {transports: ['websocket']});
+      
+    console.log(streamlabs.on('event', (eventData) => {
+      $.ajax({
+         url:'/callbacks/create_log',
+         method: 'POST',
+         data: {
+           message: eventData
+         }
+      });
+    }));
+  });
+</script>
