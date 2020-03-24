@@ -1,0 +1,2 @@
+class PointPerSubscription < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class CurrentPoint < ApplicationRecord
+end

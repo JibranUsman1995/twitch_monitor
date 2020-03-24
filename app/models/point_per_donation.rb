@@ -1,0 +1,2 @@
+class PointPerDonation < ApplicationRecord
+end

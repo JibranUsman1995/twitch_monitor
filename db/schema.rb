@@ -10,13 +10,63 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_17_114332) do
+ActiveRecord::Schema.define(version: 2020_03_24_165303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "bits", force: :cascade do |t|
+    t.string "name"
+    t.integer "amount"
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "current_points", force: :cascade do |t|
+    t.integer "value"
+  end
+
+  create_table "donations", force: :cascade do |t|
+    t.string "name"
+    t.string "currency"
+    t.integer "amount"
+    t.string "from_name"
+    t.string "from_id"
+  end
+
+  create_table "high_scores", force: :cascade do |t|
+    t.integer "value"
+  end
+
+  create_table "incentives", force: :cascade do |t|
+    t.integer "value"
+  end
+
+  create_table "point_per_bits", force: :cascade do |t|
+    t.integer "value"
+  end
+
+  create_table "point_per_donations", force: :cascade do |t|
+    t.integer "value"
+  end
+
+  create_table "point_per_subscriptions", force: :cascade do |t|
+    t.integer "value"
+    t.string "sub_type"
+  end
+
   create_table "streamlab_logs", force: :cascade do |t|
     t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.string "name"
+    t.text "message"
+    t.integer "sub_plan"
+    t.string "sub_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

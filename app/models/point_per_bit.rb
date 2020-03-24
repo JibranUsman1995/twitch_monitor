@@ -1,0 +1,2 @@
+class PointPerBit < ApplicationRecord
+end
