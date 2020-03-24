@@ -1,0 +1,2 @@
+class SoundAttachment < ApplicationRecord
+end
