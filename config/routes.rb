@@ -8,4 +8,6 @@ Rails.application.routes.draw do
       post :create_log
     end
   end
+
+  root to: 'callbacks#streamlabs'
 end
