@@ -1,4 +1,10 @@
 <div class='text-center'><h1 id='changer'>0</h1><h1> event (s) recieved </h1></div>
+<%= audio_tag SoundAttachment.where(name: 'sub').last.attachment.url, id: 'sub-sound' %>
+<%= audio_tag SoundAttachment.where(name: 'giftsub').last.attachment.url, id: 'giftsub-sound' %>
+<%= audio_tag SoundAttachment.where(name: 'resub').last.attachment.url, id: 'resub-sound' %>
+<%= audio_tag SoundAttachment.where(name: 'donation').last.attachment.url, id: 'donation-sound' %>
+<%= audio_tag SoundAttachment.where(name: 'bit').last.attachment.url, id: 'bit-sound' %>
+
 <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js' type='text/javascript'></script>
 <script>
   $(document).ready(function(){
@@ -7,6 +13,30 @@
     const streamlabs = io(`https://sockets.streamlabs.com?token=${socketToken}`, {transports: ['websocket']});
       
     console.log(streamlabs.on('event', (eventData) => {
+      if (!eventData.for && eventData.type === 'donation') {
+        document.getElementById('donation-sound').play();
+      }
+      if (eventData.for === 'twitch_account') {
+        switch(eventData.type) {
+          case 'bits':
+            document.getElementById('bit-sound').play();
+            break;
+          case 'subscription':
+            switch(eventData.message.sub_type) {
+              case 'sub':
+                document.getElementById('sub-sound').play();
+                break;
+              case 'resub':
+                document.getElementById('resub-sound').play();
+                break;
+              case 'giftsub':
+                document.getElementById('giftsub-sound').play();
+                break;
+            }
+            console.log(eventData.message);
+            break;
+        }
+      }
       var nextAmount = Integer.parseInt($('#changer').val()) + 1;
       $('#changer').val(`${nextAmount}`);
       $.ajax({

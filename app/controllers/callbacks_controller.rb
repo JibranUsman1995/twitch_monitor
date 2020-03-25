@@ -50,47 +50,8 @@ class CallbacksController < ApplicationController
   end
 
   def streamlabs
-    @streamlab_log = StreamlabLog.new(message: params.to_s)
-    parms ={
-      'grant_type' => 'authorization_code',
-      'client_id' => 'mA7ZLjbZFU1gkZ9TX5MOm7p9epDizMVw3FDe9frs',
-      'client_secret' => 'sTJyXjYZjYBcFUgkqsRFHqFsRe1txSBRlGloH5lQ',
-      'redirect_uri' => 'https://twitch-listener-rails.herokuapp.com/callbacks/streamlabs',
-      'code' => 'IjR2UrETfUSMo5MPx1Kf3t4kcYwKnxt6qBvSkEm0',
-    }
-
     respond_to do |format|
       format.html
     end
-
-    if params[:code]
-      # apit_endpoint = 'https://streamlabs.com/api/v1.0/'
-      # query_str = parms.map{|k, v| k != 'redirect_uri' ? CGI::escape(k.to_s) + '=' + CGI::escape(v) : "#{k}=#{v}" }.join('&')
-      # urll = "#{apit_endpoint}token"
-      # resp = HTTParty.post(urll, body: parms)
-      # @streamlab_log.save
-
-      # # access_token: 'WqdbZHXt83yvabJBub4x9eEv4PbT6hHBn2eOX296'
-      # # refresh_token: 'fuNRmmhDdKbLrO714B7Yg8RhByiXbiu2wkXwa8RL'
-      # # socket_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbiI6Ijg4NjFGNTJENDhGMThGQzQ3MDY3IiwicmVhZF9vbmx5Ijp0cnVlLCJwcmV2ZW50X21hc3RlciI6dHJ1ZSwidHdpdGNoX2lkIjoiMTM3MDg3ODAwIn0.57BnuQp4Wh7FuKYvywMeU-xyyG2v9riN0ISduHqRLnw'
-
-      # StreamlabLog.create(message: urll)
-      # StreamlabLog.create(message: resp.headers.to_s)
-      # StreamlabLog.create(message: resp.code.to_s)
-      # StreamlabLog.create(message: resp.body.to_s)
-
-      # respond_to do |format|
-      #   format.html
-      #   # format.json {  }
-      # end
-
-      # return render json: StreamlabLog.last(4), status: :ok
-    end
-
-    # if @streamlab_log.save
-    #   render json: @streamlab_log, status: :ok
-    # else
-    #   render json: @streamlab_log.errors, status: :unprocessable_entity
-    # end
   end
 end
